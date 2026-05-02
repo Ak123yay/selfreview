@@ -11,15 +11,16 @@
     "README.md",
     "LICENSE"
   ],
-  "scripts": {
-    "build": "tsc",
-    "postbuild": "chmod +x dist/index.js",
-    "dev": "tsx src/index.ts",
-    "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "format": "prettier --write src",
-    "prepublishOnly": "npm run build"
-  },
+"scripts": {
+  "build": "tsc",
+  "postbuild": "node -e \"require('fs').chmodSync('dist/index.js', 0o755)\"",
+  "dev": "node --import tsx/esm src/index.ts",
+  "start": "node dist/index.js",
+  "typecheck": "tsc --noEmit",
+  "format": "prettier --write src",
+  "prepublishOnly": "npm run build"
+},
+
   "keywords": ["git", "code-review", "ai", "security", "cli", "nvidia-nim", "kimi"],
   "license": "MIT",
   "dependencies": {
